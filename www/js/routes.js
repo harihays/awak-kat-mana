@@ -8,7 +8,7 @@ angular.module('starter.routes', [])
   // Each state's controller can be found in controllers.js
   $stateProvider
     
-
+//salah
 	.state('home2', {
     url: '/home2',
     templateUrl: 'gui/home.html',
