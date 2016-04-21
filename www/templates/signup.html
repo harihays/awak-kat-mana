@@ -1,0 +1,54 @@
+ <ion-view>
+      <ion-pane style="background-color: #e67e22;">
+  
+      <ion-content class="scroll">
+
+      <center>
+      <img class="logosm" src="img/logo.png">
+
+<br><br><br><br>
+
+<form name="signForm" ng-controller="RegisterController">
+
+ <div class="registerform">
+
+    <div ng-show="!signForm.$valid"><p >Fill in all required details!</p>
+    </div>
+
+    <label class="form">
+    <input type="email" placeholder="example@domain.com" name="email" ng-model="register.email" ng-required="true">
+    </label>
+
+    <div>
+    <p ng-show="!signForm.email.$valid">Please enter a valid email.</p>   
+    </div>
+   
+    <label class="form">
+    <input type="text" placeholder="Username" name="username" ng-model="register.name" ng-required="true" ng-minlength="4" ng-maxlength="10" letters-only>
+    </label>
+
+    <div>
+    <p ng-show="!signForm.username.$valid">Username - 4 to 10 characters. You are allowed to use letters and numbers only.</p>   
+    </div>
+
+    <label class="form">
+    <input type="password" placeholder="Password" name="password" ng-model="register.password" ng-required="true" ng-minlength="4" ng-maxlength="10">
+    </label>
+
+    <div>
+    <p ng-show="!signForm.password.$valid">Password - 4 to 10 characters</p>   
+    </div>
+
+</div>
+
+  <a class="forgpass" href="#/signin">I'VE ALREADY HAVE AN ACCOUNT. SIGN IN</a>
+  <a class="butform" type="button" ng-click="signForm.$valid && addUser(register)">SIGN UP</a>
+
+  </form>
+  </center>
+
+  </ion-content>
+  </ion-pane>
+  </ion-view>
+<!-- ng-disabled="!signForm.$valid" -->
+<!-- href="#/entered" -->

@@ -1,0 +1,52 @@
+
+<ion-view>
+
+<ion-pane style="background-image:url('img/5.jpg');">
+
+<ion-header-bar align-title="left" class="bar-dark" style="height:90px">
+
+  <img class="logohead" src="img/logohead.png" ng-click="addTracker()">
+</ion-header-bar>
+
+<ion-content class="scroll" >
+
+
+<br><br><br><br>
+ 
+
+      <!-- From Track Table -->
+      <div class="content" >
+        <div >
+      <p class="head" ng-click="showTracker()">Show Your Tracker</p>
+<br>
+      <p class="head" ng-click="showTracked()">Show Who You Tracked</p><br><br>
+          <ion-list ng-click="showTracker()">
+            <ion-radio class="radio-royal" value="{{ track.name }}" ng-repeat="track in tracks ">{{ track.name }}</ion-radio>
+          </ion-list>
+        
+        </div>
+      </div> 
+
+      <br><br><br><br>
+  <p><center>You track this people</center>  </p>
+
+      <!-- From Track Table -->
+      <div class="content" ng-controller="TrackController" >
+        <div >
+          <ion-list>
+            <ion-checkbox class="checkbox-royal" value="{{ track.trackedId }}" ng-repeat="track in tracks">{{ track.trackedId }}</ion-checkbox>
+          </ion-list>
+          <br><br><br><br>
+        
+        </div>
+      </div> 
+
+
+
+
+
+
+
+</ion-content>
+</ion-pane>
+ </ion-view>

@@ -1,0 +1,46 @@
+<ion-view>
+<ion-pane style="background-color: white;">
+
+
+  <ion-header-bar align-title="left" class="bar-custom-dark" style="height:8%">
+	<div ng-controller="MainCtrl">
+   		<i class="ion-android-arrow-back custom-icon" ng-click="myGoBack()"></i>
+   		<p class="headbar">SETTINGS</p>
+   	</div>
+  	</ion-header-bar>
+	<ion-content class="scroll">
+
+	<p class="space"></p>
+
+	<p class="sethead">ABOUT</p><hr>
+	<p class="setbody">About Us</p>
+	<p class="setbody">Privacy Policy</p>
+	<p class="setbody">Feedback</p><hr>
+	<p class="sethead">ACCOUNT</p><hr>
+	<p class="setbody">Edit Profile</p>
+	<p class="setbody">Change Password</p>
+	<p class="setbody" ng-click="deleteAllTracker()">Remove All Trackers</p>
+	<p class="setbody" ng-click="deleteAllTracked()">Remove All Tracks</p>
+	<p class="setbody" ng-click="logoutUser(register)">Log Out</p>
+
+	</ion-content>
+
+	<ion-footer-bar align-title="left" class="bar-dark">
+
+          <a class="tab-item" href="#entered">
+            <i class="icon ion-home"></i>Home</a>
+      
+          <a class="tab-item" href="#/following">
+            <i class="icon ion-android-person"></i>Following</a>
+
+          <a class="tab-item" href="#map">
+            <i class="icon ion-android-map"></i>Track</a>
+
+          <a class="tab-item" href="#follower">
+            <i class="icon ion-android-people"></i>Followers</a>
+
+          <a class="tab-item active" href="#setting">
+            <i class="icon ion-android-settings"></i>Settings</a>
+</ion-footer-bar> 
+	</ion-pane>
+	</ion-view>

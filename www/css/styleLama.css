@@ -1,0 +1,150 @@
+.quote{
+	font-size:2.7em;
+	color: white;
+	font-family: fantasy;
+	text-shadow: 2px 1px 3px black;
+	margin-bottom: 80px;
+}
+
+.forgpass {
+    text-decoration: none;
+	font-size: 13px;
+	color: white;
+	font-family: helvetica;
+    position: absolute;
+	margin-left: 15px;
+	bottom: 10px;
+}
+
+p.headbar{
+    font-size: 1.03em;
+    color: white;
+    font-family: helvetica;
+    text-shadow: 1px 1px 3px black;
+    margin-left: 1em;
+    margin-top: 0.8em;
+}
+
+.custom-icon {
+  font-size: 2em;
+  color : white;
+  text-shadow: 1px 1px 3px black;
+  margin-left: 0.4em;
+  margin-top: 0.3em;
+}
+
+p.head{
+	font-size:28px;
+	color: white;
+	font-family: fantasy;
+	text-shadow: 1px 1px 3px black;
+	text-align: center;
+}
+
+
+.logohead {
+	width: 27%; height:90%;
+    margin-top: 0.2em;
+    margin-left: 1.1em;
+
+}
+
+.logo {
+	width: 75%;
+	margin-top: 50px;
+}
+
+.logosm {
+    width: 75%;
+    margin-top: 30px;
+}
+
+
+.addbut {
+	width:11%; height:7.5%;
+	float: right;
+	position: absolute;
+    right: 1em;
+    bottom: 1em;
+}
+
+.butright {
+	background-color: #5c5c5c; 
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    width: 100px;
+    padding: 12px 8px;
+    float: right;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+}
+
+.butsignup {
+	background-color: #f4b409; 
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    width: 75%;
+    height: 1%;
+    padding: 15px 32px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.99em;
+}
+
+.butsignin {
+	background-color: #f57745;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    width: 75%;
+    height: 1%;
+    padding: 15px 32px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.99em;
+}
+
+.butupfb {
+	background-color: #426da9;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    width: 300px;
+    padding: 15px 32px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+}
+
+.butupg {
+	background-color: #e12626;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    color: white;
+    width: 300px;
+    padding: 15px 32px;
+    margin-bottom: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin-bottom: 50px;
+}
+
+div.space {
+	margin: 60px;
+}
+
+.item {
+	margin-left: 50px;
+	margin-right: 50px;
+}

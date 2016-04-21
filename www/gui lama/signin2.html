@@ -1,0 +1,54 @@
+<ion-view style="background-color: #27ae60;">
+      <ion-pane>
+      <!-- <ion-pane style="background-image:url('img/16.jpg');"> -->
+      
+      <ion-header-bar align-title="left" class="bar-dark" style="height:8%">
+
+      <i class="ion-android-arrow-back custom-icon"></i>
+      <p class="headbar">LOGIN</p>
+
+      </ion-header-bar>
+
+      <ion-content class="scroll">
+
+      <center>
+      <img class="logosm" src="img/logo.png">
+      
+      <div class="space"></div>
+
+<form name="logForm" ng-controller="signinController">
+
+<div ng-show="!logForm.$valid" class="alert-message warning"> <div class="box-icon"><ons-icon icon="ion-alert-circled"></ons-icon>
+    </div>
+    <p >Fill in all required details</p>
+    </div>
+
+    <!-- <div ng-show="logForm.$valid" class="alert-message success"> <div class="box-icon"><ons-icon icon="ion-ios-checkmark"></ons-icon>
+    </div>
+    <p>Congratulations! You can Log In now.</p>
+               </div> -->
+
+  <div class="list">
+    <label class="item item-input">
+    <i class="icon ion-person placeholder-icon"></i>
+    <input type="text" placeholder="Username" ng-model="user.username" required>
+    </label>
+
+    <label class="item item-input">
+    <i class="icon ion-eye placeholder-icon"></i>
+    <input type="password" placeholder="Password" g-model="user.password" required>
+    </label>
+  </div>
+   </form>
+    </center>
+ 
+
+    <a class="butright" type="button" ng-click="logForm.$valid && login(user)" ng-disabled="!logForm.$valid">SIGN IN</a>
+      
+    <a class="forgpass" href="#/forgopass">FORGOT YOUR PASSWORD?</a>
+        
+       <!--  href="#/entered" -->
+ 
+  </ion-content>
+  </ion-pane>
+  </ion-view>

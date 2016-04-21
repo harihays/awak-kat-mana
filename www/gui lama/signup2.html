@@ -1,0 +1,56 @@
+ <ion-view style="background-color: #f78139;">
+      <ion-pane>
+  
+      <ion-header-bar align-title="left" class="bar-dark" style="height:8%">
+
+      <i class="ion-android-arrow-back custom-icon"></i>
+      <p class="headbar">SIGNUP</p>
+
+      </ion-header-bar>
+
+      <ion-content class="scroll">
+
+      <center>
+      <img class="logosm" src="img/logo.png">
+
+      <a class="butupfb" type="button" href="#/signup">SIGN UP WITH FACEBOOK</a>
+      <a class="butupg" type="button" href="#/signin">SIGN UP WITH GMAIL</a>
+
+<form name="signForm" ng-controller="signupController">
+
+ <div class="list">
+    <label class="item item-input">
+    <i class="icon ion-ios-email placeholder-icon"></i>
+    <input type="text" placeholder="example@domain.com" name="email" ng-model="user.email" ng-required="true">
+    </label>
+  
+    <label class="item item-input">
+    <i class="icon ion-person placeholder-icon"></i>
+    <input type="text" placeholder="Username" name="username" ng-model="user.username" ng-required="true" ng-minlength="6" ng-maxlength="10">
+    </label>
+
+    <label class="item item-input">
+    <i class="icon ion-eye placeholder-icon"></i>
+    <input type="password" placeholder="Password" name="password" ng-model="user.password" ng-required="true" ng-minlength="6" ng-maxlength="10">
+    </label>
+
+    <label class="item item-input">
+    <i class="icon ion-eye placeholder-icon"></i>
+    <input type="password" placeholder="Confirm Password" name="password2" ng-model="user.repeatPassword" repeat-password="password">
+    </label>
+      <div>
+      <!--   <p ng-show="!signForm.password.$valid" class="note" style="color: red;">Password - 6 to 10 characters</p>    -->
+        <p ng-show="signForm.password2.$invalid" class="note" style="color: red;">Password - Doesn't match!</p>  
+      </div>
+  </div>
+
+  <a class="butright" type="button" ng-click="signForm.$valid && signup(user)">SIGN UP</a>
+  </form>
+  </center>
+
+
+  </ion-content>
+  </ion-pane>
+  </ion-view>
+<!-- ng-disabled="!signForm.$valid" -->
+<!-- href="#/entered" -->
