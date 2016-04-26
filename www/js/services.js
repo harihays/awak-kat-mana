@@ -100,8 +100,10 @@ angular.module('starter.services', [])
 })
 
 //Functions for location table
-.factory('locationServices', function($http) {
+.factory('locationServices', function($http, SessionStorage) {
     var baseUrl = 'http://fyproject.site88.net/api/';
+    var userId = SessionStorage.getSession("userId");
+    console.log("User Id utk show location "+ userId);
 
     return {
 
@@ -115,6 +117,13 @@ angular.module('starter.services', [])
         //To update the user's location for both
         updateLocation: function (location){
             return $http.get(baseUrl+'updateLocation.php?userId='+location.userId+'&lat='+location.lat+'&lng='+location.lng); 
+        },
+
+        //To update the user's location for both
+        getMyLocation: function (location){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id utk show location sendiri "+ userId );
+            return $http.get(baseUrl+'getMyLocation.php?userId='+location.userId); 
         }
 
     };
@@ -158,9 +167,28 @@ angular.module('starter.services', [])
           userId = SessionStorage.getSession("userId");
           console.log("User Id "+ userId +" untuk showEmail ");
             return $http.get(baseUrl+'getUserDetail.php?userId='+userId);
+        },
+
+        //User login 
+        updateEmail: function (){
+          userId = SessionStorage.getSession("userId");
+          console.log("User Id "+ userId +" untuk showUsername ");
+            return $http.get(baseUrl+'updateEmail.php?userId='+userId);
+        },
+
+        //User login 
+        updateUsername: function (){
+          userId = SessionStorage.getSession("userId");
+          console.log("User Id "+ userId +" untuk showEmail ");
+            return $http.get(baseUrl+'updateUsername.php?userId='+userId);
+        },
+
+        //User login 
+        updatePassword: function (){
+          userId = SessionStorage.getSession("userId");
+          console.log("User Id "+ userId +" untuk showEmail ");
+            return $http.get(baseUrl+'updatePassword.php?userId='+userId);
         }
-
-
 
     };
 })

@@ -36,8 +36,6 @@ angular.module('starter.controllers', [])
  $scope.Refresh = function(){
     $window.location.reload(true); 
   };
-                   
-
 
 /*  $scope.getMyLocation = function(){
     locationServices.getMyLocation().success(function(data){
@@ -46,11 +44,12 @@ angular.module('starter.controllers', [])
     });
   };*/
 
+//$scope.Refresh();
  $scope.showUsername();
  $scope.showEmail();
  $scope.showNoOfTracker();
  $scope.showNoOfTracked();
- //$scope.getMyLocation();
+//$scope.getMyLocation();
 
 })
 
@@ -84,11 +83,14 @@ $scope.showTracked();
 
 //3
 //To call the functions for trackServices FOR THE TRACKER
-.controller('TrackerController', function($scope, trackServices,$ionicPopup){
+.controller('TrackerController', function($scope, trackServices,$ionicPopup, $ionicLoading){
 
   $scope.showTracker = function(){
+    $ionicLoading.show();
     trackServices.getTracker().success(function(data){
       $scope.trackers = data;
+      $ionicLoading.hide();
+      
       console.log("Berjaya show tracker");
     });
   };
@@ -125,6 +127,17 @@ $scope.showTracker();
                     $ionicPopup.alert({
                       title: 'Successfully added!',
                       content: 'User '+ register.name+ ' has been added as a tracker!' 
+                    })
+
+                    //masuk dlm system      
+                    $state.go('follower');
+                    } 
+
+                else if (data == 3) {
+
+                    $ionicPopup.alert({
+                      title: 'Successfully added!',
+                      content: 'User '+ register.name+ ' has been already added as a tracker before!' 
                     })
 
                     //masuk dlm system      
@@ -179,16 +192,43 @@ $scope.showTracker();
     var username = " ";
 
     $scope.addUser = function(register){
+
         registerServices.addUser(register).success(function(data){
             $scope.registers = data;
             console.log("scope.registers " + $scope.registers);
 
-                    $ionicPopup.alert({
-                      title: 'Registration',
-                      content: $scope.registers,
-                    })
+                     if (data==1){
+                      $ionicPopup.alert({
+                      title: 'Registration success',
+                      content: 'Hi '+  register.name+ '. Thank you for your registration. You can sign in now!'
+                      })
 
-                    $state.go('signin');
+                      $state.go('signin');
+
+                     }
+
+                     else if (data==2){
+                      $ionicPopup.alert({
+                      title: 'Opps!',
+                      content: 'Hi '+  register.name+ '. Sorry, the email is already registered :('
+                      })
+                    }
+
+                     else if (data==3){
+                      $ionicPopup.alert({
+                      title: 'Opps!',
+                      content: 'Hi '+  register.name+ '. Sorry, the username is already taken :('
+                      })
+                    }
+
+                     else {
+                      $ionicPopup.alert({
+                      title: 'Error',
+                      content: 'Sorry '+  register.name+ '. Error! Please Try Again'
+                      })
+                    }
+
+
 
 
         });//end function data
@@ -201,7 +241,29 @@ $scope.showTracker();
             console.log("Berjaya dapat userId " + $scope.registers.userid );
             console.log("Data " + data );
 
-        if (data!=0) {
+
+        if (data==0)        
+                    {
+                      
+                    $ionicPopup.alert({
+                      title: 'Error',
+                      content: 'Hi '+  register.name+ '! Wrong password. Please try again.'
+                    })
+                      
+                    }
+
+
+         else if(data==1)        
+                    {
+                      
+                    $ionicPopup.alert({
+                      title: 'Error',
+                      content: 'Hi '+  register.name+ '! Your username is not registered yet'
+                    })
+                      
+                    }
+
+        else if (data!=0)  {
 
                     SessionStorage.setSession("userId",$scope.registers.userid);
                     SessionStorage.setSession("username",$scope.registers.name);
@@ -223,15 +285,17 @@ $scope.showTracker();
 
                     }
 
-        else        
-                    {
+       
+else  {
                       
                     $ionicPopup.alert({
                       title: 'Error',
-                      content: 'Hi '+  register.name+ '! Wrong password. Please try again.'
+                      content: 'Hi '+  register.name+ '! Please try again. Error'
                     })
                       
                     }
+
+
             
         });//function data
     };//userlogin
