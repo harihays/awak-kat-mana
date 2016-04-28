@@ -1,39 +1,51 @@
 angular.module('starter.services', [])
 
-//Save session
+//Save session for signUp, signIn, signOut
 .factory('SessionStorage', function(){
 
   return{
 
     getSession: function(key) {
-      var data = sessionStorage.getItem(key);
-      console.log("Data "+ key + " dalam get session :" + data);
+      var data = localStorage.getItem(key);
+      console.log("Data "+ key + " dalam get session : " + data);
       if(data){
         return data;
               }
-      console.log("Error : " );
      
       },
 
     setSession: function(key, data){
-      sessionStorage.setItem(key, data);
+      localStorage.setItem(key, data);
       console.log("Data "+ key + " utk set dalam SessionStorage: "+ data);
       },
 
     removeSession: function(key) {
-      sessionStorage.removeItem(key);
+      localStorage.removeItem(key);
     console.log("Data dalam get session utk dah kena remove");
       }
    
-  }
+      };
 })
 
+
+
+//Save session for signUp, signIn, signOut
+.factory('RefreshServices', function($window){
+
+  return{
+    refreshPage: function() {
+      $window.location.reload(true); 
+    console.log("Rferesh");
+      }
+      };
+})
+
+
+//Boleh delete
 //Functions for track table
 .factory('trackServices', function($http, SessionStorage) {
     
     var baseUrl = 'http://fyproject.site88.net/api/';
-  //  var userId2 = sessionStorage.getItem("key");
-    //console.log("User Id manual utk show track22 "+ userId2);
     var userId = SessionStorage.getSession("userId");
     console.log("User Id utk show tracks "+ userId);
    
@@ -99,11 +111,96 @@ angular.module('starter.services', [])
     };
 })
 
+//Functions for track table
+.factory('trackedServices', function($http, SessionStorage) {
+    
+    var baseUrl = 'http://fyproject.site88.net/api/';
+    var userId = SessionStorage.getSession("userId");
+    console.log("User Id utk show detail tracks "+ userId);
+   
+    return {
+
+        getTracked: function (){
+            return $http.get(baseUrl+'getTracked.php?userId='+userId); 
+        },
+
+        //To delete tracked person
+        deleteTracked: function  (track){
+        
+            return $http.get(baseUrl+'deleteTracked2.php?userId='+userId+'&deletedId='+track.trackedId);
+        },
+
+        //To delete all tracked person
+        deleteAllTracked: function  (){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id utk delete "+ userId );
+            return $http.get(baseUrl+'deleteAllTracked.php?userId='+userId);
+        },
+
+        //To delete all tracker person
+        showNoOfTracked: function  (){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id utk delete "+ userId );
+            return $http.get(baseUrl+'showNoOfTracked.php?userId='+userId);
+        }
+
+    };
+})
+
+
+
+
+//Functions for track table
+.factory('trackerServices', function($http, SessionStorage) {
+    
+    var baseUrl = 'http://fyproject.site88.net/api/';
+    var userId = SessionStorage.getSession("userId");
+    console.log("User Id utk show tracks "+ userId);
+   
+    return {
+
+        //To get list of our tracker (Who track us?)
+        getTracker: function (){
+            return $http.get(baseUrl+'getTracker.php?userId='+userId); 
+        },
+
+        //To add tracker 
+        addTracker: function (track,register){
+        userId = SessionStorage.getSession("userId");
+            return $http.get(baseUrl+'addTracker2.php?userId='+userId+'&name='+register.name);
+        },
+
+        //To delete tracker person
+        deleteTracker: function  (track){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id "+ userId +" untuk delete tracker "+track.name );
+            return $http.get(baseUrl+'deleteTracker2.php?userId='+userId+'&deletedId='+track.trackerId);
+        },
+
+        //To delete all tracker person
+        deleteAllTracker: function  (){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id utk delete "+ userId );
+            return $http.get(baseUrl+'deleteAllTracker.php?userId='+userId);
+        },
+
+        //To delete all tracker person
+        showNoOfTracker: function  (){
+        userId = SessionStorage.getSession("userId");
+        console.log("User Id utk delete "+ userId );
+            return $http.get(baseUrl+'showNoOfTracker.php?userId='+userId);
+        }
+
+    };
+})
+
+
+
 //Functions for location table
 .factory('locationServices', function($http, SessionStorage) {
     var baseUrl = 'http://fyproject.site88.net/api/';
     var userId = SessionStorage.getSession("userId");
-    console.log("User Id utk show location "+ userId);
+    console.log("User Id utk show locations "+ userId);
 
     return {
 
@@ -131,6 +228,7 @@ angular.module('starter.services', [])
 
 //Functions for register table
 .factory('registerServices', function($http, SessionStorage) {
+    console.log("registerServices");
     var baseUrl = 'http://fyproject.site88.net/api/';
     var userId = SessionStorage.getSession("userId");
     console.log("User Id utk show registerServices "+ userId);
@@ -195,6 +293,7 @@ angular.module('starter.services', [])
 
 //To get location of user to put markers
 .factory('Markers', function($http, SessionStorage) {
+          console.log("Markers maps");
 
   var markers = [];
 
@@ -215,6 +314,7 @@ angular.module('starter.services', [])
 
 //Create map
 .factory('GoogleMaps', function($cordovaGeolocation, Markers, locationServices, SessionStorage){
+          console.log("Google maps");
 
   var apiKey = false;
   var map = null;
@@ -244,8 +344,8 @@ angular.module('starter.services', [])
           //new google.maps.LatLng(-33.92, 151.25)
           var mapOptions = {
             center: latLng,
-            zoom: 8,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.SATELLITE
           };
 
           map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -323,7 +423,9 @@ angular.module('starter.services', [])
 
   return {
     init: function(){
+
       initMap();
+
     }
   }
 

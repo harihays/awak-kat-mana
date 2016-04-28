@@ -1,235 +1,13 @@
-.quote{
-	font-size:2.7em;
-	color: white;
-	font-family: fantasy;
-	text-shadow: 2px 1px 3px black;
-	margin-bottom: 80px;
+input[type="text"] { 
+    border: none;
 }
 
-.forgpass {
-    text-decoration: none;
-	font-size: 0.8em;
-	color: white;
-	font-family: helvetica;
-    margin-left: 13%;
+input[type="emai"]{
+    border: none;
 }
 
-p.headbar{
-    font-size: 1.03em;
-    color: white;
-    font-family: helvetica;
-    margin-left: 1em;
-    margin-top: 1em;
-    display: -webkit-inline-box;
-}
-
-p.welcome{
-    font-size: 1.3em;
-    color: #2da35c;
-    margin-top: 2em;
-}
-
-.custom-icon {
-  font-size: 2em;
-  color : white;
-  text-shadow: 1px 1px 3px black;
-  margin-left: 0.4em;
-  margin-top: 0.3em;
-}
-
-p.head{
-	font-size: 2em;
-	color: #71BA51;
-	font-family: fantasy;
-    float: center;
-    margin-top: 2em;
-}
-
-p.title{
-    font-size: 1em;
-    color: #2da35c;
-    float: center;
-}
-
-p.sethead{
-    font-size: 1.1em;
-    color: #383838;
-    font-weight: bold;
-    margin-left: 2em;
-
-}
-
-p.setbody{
-    font-size: 1em;
-    color: #383838;
-    font-weight: bold;
-    margin-left: 2em;
-}
-
-p.profhead{
-    font-size: 1.6em;
-    color: #26A65B;
-    margin-left: 1.4em;
-    margin-bottom:0.3em;
-    margin-top: 1em;
-}
-
-p.profile{
-    font-size: 1.1em;
-    margin-left: 2em;
-    margin-bottom:1em;
-    margin-top: 1em;
-}
-
-.logohead {
-	width: 27%; height:90%;
-    margin-top: 0.2em;
-    margin-left: 1.1em;
-
-}
-
-.logo {
-	width: 75%;
-	margin-top: 50px;
-}
-
-.logosm {
-    width: 75%;
-    margin-top: 30px;
-}
-
-.dp{
-    width:30%;
-    margin-top: 1em;
-    margin-bottom: 1em;
-
-}
-
-.tracks{
-    background-color: #e67e22;
-    color: white;
-    font-size: 1em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 0.3em;
-}
-.track{
-    background-color: #e67e22;
-    color: white;
-    font-size: 1em;
-    padding: 0.5em 0.5em 0.5em 0.5em;
-    border-radius: 0.3em;
-    margin-right: 0.3em;
-}
-
-.editprof{
-    background-color: #77b86d;
-    color: white;
-    font-size: 1em;
-    padding: 0.5em 4.8em 0.5em 4.8em;
-    border-radius: 0.3em;
-    margin-top: 0.3em;
-}
-
-.addbut {
-    background-color: #f57745; 
-    color: white;
-    width: 1.3em;
-    height: 1.3em;
-    padding-top: 0.3em;
-    float: right;
-    margin-right: 0.4em;
-    margin-top: 0.1em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 3em;
-    border-radius: 50%;
-
-}
-
-.butright {
-	background-color: #f57745; 
-    color: white;
-    width: 25%;
-    padding: 0.5em 0.5em;
-    float: right;
-    margin-right: 4em;
-    margin-top: 1em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.85em;
-    border-radius: 0.3em;
-}
-
-.butform {
-    background-color: #565656; 
-    color: white;
-    width: 25%;
-    padding: 0.9em 0.9em;
-    float: right;
-    margin-right: 4em;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.85em;
-    border-radius: 0.3em;
-}
-
-.butsign {
-	background-color: #f57745; 
-	/*box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);*/
-    color: white;
-    width: 75%;
-    height: 1%;
-    padding: 15px 32px;
-    margin-bottom: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.99em;
-}
-
-.butsignin {
-	background-color: #f57745;
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    color: white;
-    width: 75%;
-    height: 1%;
-    padding: 15px 32px;
-    margin-bottom: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 0.99em;
-}
-
-.butupfb {
-	background-color: #426da9;
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    color: white;
-    width: 300px;
-    padding: 15px 32px;
-    margin-top: 50px;
-    margin-bottom: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-}
-
-.butupg {
-	background-color: #e12626;
-	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    color: white;
-    width: 300px;
-    padding: 15px 32px;
-    margin-bottom: 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1em;
-    margin-bottom: 50px;
+input[type="password"]{
+    border: none;
 }
 
 .butremove {
@@ -238,7 +16,6 @@ p.profile{
     width: 25%;
     padding: 0.5em 0.5em;
     float: right;
-    margin-right: 2em;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -246,71 +23,38 @@ p.profile{
     border-radius: 0.3em;
 }
 
-
-.scroll{
-    width:100%;
-    height:100%;
+.butupdate {
+    background-color: #f57745; 
+    color: white;
+    width: 25%;
+    padding: 0.5em 0.5em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 0.3em;
 }
 
-div.top {
-	height: 70%;
+.butracking {
+    background-color: #6CCE52; 
+    color: white;
+    width: 40%;
+    padding: 0.6em 0.6em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 0.3em;
 }
 
-div.bottom{
-    height:30%;
-}
-
-p.space{
-    margin-bottom: 2em;
-}
-
-.item {
-	margin-left: 50px;
-	margin-right: 50px;
-}
-
-/*form*/
-
-input[type=text],input[type=email]  {
-    background-color: white;
-    opacity: 0.3;
-    font-color: white;
-    width: 75%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    margin-bottom: 5%;
-
-}
-
-input[type=text]:focus {
-
-    border: 1px solid #555;
-    background-color: white;
-    opacity: 1;
-    font-color: black;
-}
-
-input[type=password] {
-    background-color: white;
-    opacity: 0.3;
-    font-color: white;
-    width: 75%;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    margin-bottom: 5%;
-}
-
-input[type=password]:focus {
-    border: 1px solid #555;
-    background-color: white;
-    opacity: 1;
-    font-color: black;
-}
-
-hr{
-    border: 0;
-    width: 90%;
-    height: 1px;
-    background: #b0b0b0;
-    background-image: linear-gradient(to right, #d6d4d4, #b0b0b0, #d6d4d4);
+.butracker {
+    background-color: #F95C50; 
+    color: white;
+    width: 40%;
+    padding: 0.6em 0.6em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 0.3em;
 }

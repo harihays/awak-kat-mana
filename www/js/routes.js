@@ -1,134 +1,146 @@
 angular.module('starter.routes', [])
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-//salah
-	.state('home2', {
-    url: '/home2',
-    templateUrl: 'gui/home.html',
-    controller: 'LocationController'
-  })
-  .state('addtrack2', {
-    url: '/setting2',
-    templateUrl: 'gui/addtrack.html',
-    controller: 'AddTrackerController'
-  })
-  .state('entered2', {
-    url: '/entered2',
-    templateUrl: 'gui/entered.html',
-     controller: 'RegisterController'
-  })
-  .state('follower2', {
-    url: '/follower2',
-    templateUrl: 'gui/follower.html',
-    controller: 'TrackerController'
+
+//Tab Menu
+  .state('tabsController', {
+    url: '/page1',
+    templateUrl: 'templates/tabsController.html',
+    abstract:true
   })
 
-  .state('following2', {
-    url: '/following2',
-    templateUrl: 'gui/following.html',
-    controller: 'TrackedController'
-  })
-  .state('forgopass2', {
-    url: '/forgopass2',
-    templateUrl: 'gui/forgopass.html'
-  })
-
-  .state('signin2', {
-    url: '/signin2',
-    templateUrl: 'gui/signin.html',
-     controller: 'RegisterController'
+//Tab 1
+    .state('tabsController.home', {
+    url: '/home',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/home.html',
+        controller: 'HomeController'
+      }
+    }
   })
 
-  .state('signup2', {
-    url: '/signup2',
-    templateUrl: 'gui/signup.html',
-    controller: 'RegisterController'
+//Tab 2
+  .state('tabsController.tracking', {
+    url: '/tracking',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/tracking.html',
+        controller: 'TrackedController'
+      }
+    }
   })
 
-  .state('test2', {
-    url: '/test2',
-    templateUrl: 'gui/test.html'
+//Tab 3
+  .state('tabsController.map', {
+    url: '/map',
+    views: {
+      'tab3': {
+        templateUrl: 'templates/map.html',
+        controller: 'MapCtrl'
+      }
+    }
   })
 
-  .state('map2', {
-    url: '/map2',
-    templateUrl: 'gui/map.html',
-    controller: 'MapCtrl'
-
+//Tab 4
+  .state('tabsController.tracker', {
+    url: '/tracker',
+    views: {
+      'tab6': {
+        templateUrl: 'templates/tracker.html',
+        controller: 'TrackerController'
+      }
+    }
   })
 
-
-//yang betul
-  .state('home', {
-    url: '/',
-    templateUrl: 'templates/home.html',
-    controller: 'LocationController'
-  })
-  .state('addtrack', {
-    url: '/addtrack',
-    templateUrl: 'templates/addtrack.html',
-    controller: 'AddTrackerController'
-  })
-  .state('entered', {
-    url: '/entered',
-    templateUrl: 'templates/entered.html',
-     controller: 'HomeController'
-  })
-  .state('follower', {
-    url: '/follower',
-    templateUrl: 'templates/follower.html',
-    controller: 'TrackerController'
+//Tab 5
+  .state('tabsController.settings', {
+    url: '/settings',
+    views: {
+      'tab7': {
+        templateUrl: 'templates/settings.html',
+        controller: 'SettingController'
+      }
+    }
   })
 
-  .state('following', {
-    url: '/following',
-    templateUrl: 'templates/following.html',
-    controller: 'TrackedController'
+//Sign Up
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'templates/signup.html',
+    controller: 'SignUpController'
   })
+
+//Sign In
+  .state('signin', {
+    url: '/signin',
+    templateUrl: 'templates/signin.html',
+    controller: 'SignInController'
+  })
+
+//Forgot Password
   .state('forgopass', {
     url: '/forgopass',
     templateUrl: 'templates/forgopass.html'
   })
 
-  .state('signin', {
-    url: '/signin',
-    templateUrl: 'templates/signin.html',
-     controller: 'RegisterController'
+//Main
+  .state('main', {
+    url: '/main',
+    templateUrl: 'templates/main.html'
   })
 
-  .state('signup', {
-    url: '/signup',
-    templateUrl: 'templates/signup.html',
-    controller: 'RegisterController'
+//Add Tracker
+  .state('addtrack', {
+    url: '/addtrack',
+    templateUrl: 'templates/addtrack.html',
+    controller: 'AddTrackerController'
   })
 
-  .state('setting', {
-    url: '/setting',
-    templateUrl: 'templates/settings.html',
-    controller: 'SettingController'
+//About Us
+.state('aboutus', {
+    url: '/aboutus',
+    templateUrl: 'templates/aboutus.html'
   })
 
-  .state('test', {
-    url: '/test',
-    templateUrl: 'templates/test.html'
+//Change Password
+.state('changepass', {
+    url: '/changepass',
+    templateUrl: 'templates/changepass.html'
   })
 
-  .state('map', {
-    url: '/map',
-    templateUrl: 'templates/map.html',
-    controller: 'MapCtrl'
+//Change Username
+.state('changeuname', {
+    url: '/changeuname',
+    templateUrl: 'templates/changeuname.html'
+  })
 
+//Feedback
+.state('feedback', {
+    url: '/feedback',
+    templateUrl: 'templates/feedback.html'
+  })
+
+//Help
+.state('help', {
+    url: '/help',
+    templateUrl: 'templates/help.html'
+  })
+
+//Privacy
+.state('privacy', {
+    url: '/privacy',
+    templateUrl: 'templates/privacy.html'
   })
 
 
+$ionicConfigProvider.tabs.position('bottom');
 
-  $urlRouterProvider.otherwise('/')
 });
 

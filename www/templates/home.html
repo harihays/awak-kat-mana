@@ -1,23 +1,43 @@
+<ion-view title="About Me" id="page2" >
 
-    <ion-view>
+ <div ng-controller="MenuController">
+    </div>
+
     
-    <ion-pane style="background-color: #71BA51;">
-      
-      <ion-content class = "scroll">
-      <center>
-      <img class="logo" src="img/logo.png">
-      <p class="space"></p>
+    <ion-content padding="true" class="manual-ios-statusbar-padding">
 
-      <p class="quote">Never Missed<br><br>A Thing Anymore</p>   
+     <ion-refresher 
+            on-refresh="doRefresh()"
+            pulling-text="Pull to refresh..."
+            refreshing-icon="ion-load-c">
+        </ion-refresher>
 
-           
-      <a class="butsign" type="button" href="#/signup">SIGN UP</a><br>
-      <a class="butsign" type="button" href="#/signin">SIGN IN</a><br>
-      <!-- <a class="butsignup" type="button" href="#/entered" >(ke entered)</a><br>
-      <a class="butsignin" type="button" href="#/map" >(ke map)</a><br>
-      <a class="butsignin" type="button" href="#/addtrack" >ADD TRACK</a><br><br><br><br><br><br> -->
-      </center>
+        
+        <h3 id="home-heading3" style="color:#00B16A;font-weight:400;text-align:center;">Hi awak!</h3>
+        <div>
+            <img src="img/katmana round.png" width="35%" height="auto" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+        </div>
 
-  </ion-content>
-  </ion-pane>
-  </ion-view>
+        <div><center>
+        <a class="butracking" type="button" ui-sref="tabsController.tracking"><b>{{trackeds}}</b> Tracking</a>
+        <a class="butracker" type="button" ui-sref="tabsController.tracker"><b>{{trackers}}</b> Trackers</a>
+        </center>
+        </div>
+
+
+        <h3 id="home-heading4" style="color:#00B16A;font-weight:400;">Username</h3>
+        <p>{{ registers.name }}</p>
+
+        <div class="spacer" style="width: 300px; height: 5px;"></div>
+
+        <h3 id="home-heading5" style="color:#00B16A;font-weight:400;">Email</h3>
+        <p>{{ registers.email }}</p>
+    
+<!--         <div><a class="butupdate" type="button" ng-click="Refresh()">UPDATE</a></div>
+ -->
+        <div class="spacer" style="width: 300px; height:5px;"></div>
+
+        <img src="img/circle.png" width="15%" height="auto" ui-sref="addtrack" style="display: -webkit-box; margin-left: auto;">
+
+    </ion-content>
+</ion-view>

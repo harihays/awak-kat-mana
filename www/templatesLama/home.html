@@ -1,0 +1,32 @@
+<ion-view title="About Me" id="page2">
+    <ion-content padding="true" class="manual-ios-statusbar-padding" scroll="false">
+        <h3 id="home-heading3" style="color:#00B16A;font-weight:400;text-align:center;">Hi awak!</h3>
+        <div>
+            <img src="img/home.png" width="35%" height="auto" style="display: block; margin-left: auto; margin-right: auto; margin-bottom: 20px;">
+        </div>
+
+        <div class="button-bar">
+            <button id="home-button11" class="button button-balanced  button-block" ui-sref="tabsController.tracking"><b>{{trackeds}}</b> Tracking</button>
+            <button id="home-button12" class="button button-assertive  button-block" ui-sref="tabsController.tracker"><b>{{trackers}}</b> Trackers</button>
+        </div>
+
+        <h3 id="home-heading4" style="color:#00B16A;font-weight:400;">Username</h3>
+        <p>{{ registers.name }}</p>
+
+        <div class="spacer" style="width: 300px; height: 5px;"></div>
+
+        <h3 id="home-heading5" style="color:#00B16A;font-weight:400;">Email</h3>
+        <p>{{ registers.email }}</p>
+    
+        <div><button ng-click="Refresh()">UPDATE</button></div>
+
+        <div class="spacer" style="width: 300px; height: 30px;"></div>
+
+        <div>
+             <button style="display:block;" ui-sref="addtrack">
+            <img src="img/add.png" width="15%" height="auto" style="display: block; margin-left: auto;">
+            </button>
+        </div>
+
+    </ion-content>
+</ion-view>

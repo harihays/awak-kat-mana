@@ -1,0 +1,28 @@
+<ion-view title="Tracking" id="page3">
+    <ion-content padding="true" class="manual-ios-statusbar-padding">
+
+
+        <ion-refresher 
+            on-refresh="doRefresh()"
+            pulling-text="Pull to refresh..."
+            refreshing-icon="ion-load-c">
+        </ion-refresher>
+
+      
+          <div class="content">
+      <h4 id="tracker-heading7" style="color:#5F5F5F;font-weight:400;text-align:center;">
+      The people you track
+      </h4>
+
+      <br>
+          <ion-list>
+            <ion-item  value="{{tracked.name}}" ng-repeat="tracked in trackeds ">
+            {{ tracked.name }} 
+            <a class="butremove" type="button" ng-click="deleteTracked(tracked)">REMOVE</a>
+            </ion-item>
+          </ion-list>    
+
+          </div> 
+       
+    </ion-content>
+</ion-view>

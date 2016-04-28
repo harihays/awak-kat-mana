@@ -2772,7 +2772,9 @@ ion-infinite-scroll {
  * --------------------------------------------------
  */
 p {
-  margin: 0 0 10px; }
+  margin: 0 0 10px; 
+  font-size: 16px;
+}
 
 small {
   font-size: 85%; }
@@ -3611,8 +3613,10 @@ a.subdued {
   background-color: white;
   background-image: none;
   border: none;
-  border-bottom: 1px solid #ddd;
-  padding-top: 2px; }
+  border-bottom: none;
+  padding-top: 2px;
+  padding-bottom: 0px;
+  }
 .tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
   margin-top: -2px;
   border-style: solid;
@@ -3749,11 +3753,13 @@ a.subdued {
   .tabs-striped.tabs-dark .tab-item .badge {
     opacity: 0.4; }
   .tabs-striped.tabs-dark .tab-item.tab-item-active, .tabs-striped.tabs-dark .tab-item.active, .tabs-striped.tabs-dark .tab-item.activated {
-    margin-top: -2px;
+    margin-top: -3px;
     color: #fff;
     border-style: solid;
-    border-width: 2px 0 0 0;
-    border-color: #fff; }
+    border-width: 3px 0 0 0;
+    border-color: #63B135;
+    background-color: #252525;
+    }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 .tabs-striped.tabs-background-light .tabs {
@@ -4645,17 +4651,17 @@ ion-tabs.tabs-color-active-dark .tab-item {
  * --------------------------------------------------
  */
 .item {
-  border-color: #ddd;
-  background-color: #fff;
-  color: #444;
-  position: relative;
-  z-index: 2;
-  display: block;
-  margin: -1px;
-  padding: 16px;
-  border-width: 1px;
-  border-style: solid;
-  font-size: 16px; }
+    border-color: #ddd;
+    background-color: #fff;
+    color: #40A528;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    border-width: 1px;
+    border-style: none;
+    font-size: 16px; }
   .item h2 {
     margin: 0 0 2px 0;
     font-size: 16px;
@@ -7369,7 +7375,9 @@ a.button {
  * --------------------------------------------------
  */
 .padding {
-  padding: 10px; }
+  padding: 10px; 
+  color: #4C4C4C;
+  }
 
 .padding-top, .padding-vertical {
   padding-top: 10px; }
