@@ -112,19 +112,22 @@ angular.module('starter.routes', [])
 //Change Password
 .state('changepass', {
     url: '/changepass',
-    templateUrl: 'templates/changepass.html'
+    templateUrl: 'templates/changepass.html',
+    controller: 'ChangePasswordController'
   })
 
 //Change Username
 .state('changeuname', {
     url: '/changeuname',
-    templateUrl: 'templates/changeuname.html'
+    templateUrl: 'templates/changeuname.html',
+    controller: 'EditUsernameController'
   })
 
 //Feedback
 .state('feedback', {
     url: '/feedback',
-    templateUrl: 'templates/feedback.html'
+    templateUrl: 'templates/feedback.html',
+    controller: 'FeedbackController'
   })
 
 //Help
@@ -139,6 +142,23 @@ angular.module('starter.routes', [])
     templateUrl: 'templates/privacy.html'
   })
 
+
+
+
+/*  .state('getLocation', {
+    url: '/getLocation',
+    templateUrl: 'templates/getLocation.html',
+    controller: 'getLocationCtrl'
+  })
+
+  .state('locationDetails', {
+    url: '/details/:id',
+    templateUrl: 'templates/locationDetails.html',
+    controller: 'locationDetailsCtrl'
+  })
+
+
+  */
 
 $ionicConfigProvider.tabs.position('bottom');
 

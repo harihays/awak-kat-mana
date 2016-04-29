@@ -26,11 +26,13 @@ angular.module('starter.controllers', [])
 //Tab 1
 //HOME
 //Controller for HOME to show USER'S DETAIL
-.controller('HomeController', function($scope, registerServices, trackServices, locationServices, $window, $ionicLoading, trackedServices, trackerServices,RefreshServices, $ionicPlatform,$location){
+.controller('HomeController', function(  $cordovaGeolocation, GoogleMaps, $ionicHistory, $state, $scope, registerServices, trackServices, locationServices, $window, $ionicLoading, trackedServices, trackerServices,RefreshServices, $ionicPlatform,$location){
 
 	$scope.showUsername = function(){
 		registerServices.getUserDetail().success(function(data){
+ $ionicLoading.show();
 			$scope.registers = data;
+ $ionicLoading.hide();
 			console.log("Berjaya show username: "+ $scope.registers.name );
 		});
 	};
@@ -56,20 +58,23 @@ angular.module('starter.controllers', [])
     });
   };
 
+
+
  $scope.Refresh = function(){
     RefreshServices.refreshPage().success(function(){
     });
   };
 
   $scope.doRefresh = function(){
- 
-       
+
+
        $scope.showUsername();
        $scope.showEmail();
        $scope.showNoOfTracker();
        $scope.showNoOfTracked();
        console.log("Berjaya refresh tracking");
          $scope.$broadcast('scroll.refreshComplete');
+         $state.go($state.current, {}, {reload: true});
    }
 
 
@@ -83,14 +88,36 @@ angular.module('starter.controllers', [])
   };*/
 
       console.log("Sekarang dekat " + $location.path() );
+  
+            //sepatutnya kat services tapi ...
+            var posOptions = {timeout: 10000, enableHighAccuracy: false};
+            $cordovaGeolocation
+              .getCurrentPosition(posOptions)
+              .then(function (position) {
+                var lat  = position.coords.latitude
+                var long = position.coords.longitude
 
- $ionicLoading.show();
+                    location.lat=position.coords.latitude;
+                    location.lng=position.coords.longitude;
+                    location.userId=userId;
+                    location.timestamps=new Date();
+                   
+                    console.log("Pstu save lat "+ location.lat+" lng "+location.lng+ " User Id = "+location.userId);
+                    locationServices.updateLocation(location);
+
+              }, function(err) {
+                console.log("Error");
+              });
+
+ //$ionicLoading.show();
+ $ionicHistory.clearCache();
  $scope.showUsername();
  $scope.showEmail();
  $scope.showNoOfTracker();
  $scope.showNoOfTracked();
 //$scope.getMyLocation();
- $ionicLoading.hide();
+ //$ionicLoading.hide();
+
 
 })
 
@@ -113,16 +140,33 @@ angular.module('starter.controllers', [])
   };
 
   $scope.deleteTracked = function(tracked){
-    trackedServices.deleteTracked(tracked).success(function(data){
-      $scope.tracks = data;
-      console.log("data " + data);
-      console.log("Berjaya delete nama tracked " + tracked.name + " id kite(tracker) " +tracked.trackerId);
-    });
-                    $ionicPopup.alert({
-                      title: 'Successfully delete!',
-                      content: 'Username '+ tracked.name+ ' has been removed ' 
-                    })
-         // $scope.Refresh();
+
+                          var confirmPopup = $ionicPopup.confirm({
+                             title: 'Delete Tracker',
+                              template: 'Are you sure you want to remove ' + tracked.name +'?'
+                           });
+
+            confirmPopup.then(function(res) {
+                  if(res) {
+
+           
+          trackedServices.deleteTracked(tracked).success(function(data){
+            $scope.tracks = data;
+            console.log("data " + data);
+            console.log("Berjaya delete nama tracked " + tracked.name + " id kite(tracker) " +tracked.trackerId);
+          });
+                          $ionicPopup.alert({
+                            title: 'Successfully delete!',
+                            content: 'Username '+ tracked.name+ ' has been removed ' 
+                          })
+
+              console.log('You are sure');
+                           } 
+
+                  else {
+             console.log('You are not sure');
+                        }
+         });
 
   };
 
@@ -151,9 +195,10 @@ angular.module('starter.controllers', [])
 //Tab 3
 //MAP
 //Controller to display maps
-.controller('MapCtrl', function($scope, $state, $cordovaGeolocation, GoogleMaps, $location) {
+.controller('MapCtrl', function($window, $scope, $state, $cordovaGeolocation, GoogleMaps, $location) {
 
     GoogleMaps.init();
+
 
 })
 
@@ -164,7 +209,7 @@ angular.module('starter.controllers', [])
 //Tab 4
 //TRACKER
 //Controller for tracker. The person who are tracking us.
-.controller('TrackerController', function($scope, trackServices,$ionicPopup, $ionicLoading, trackedServices, trackerServices, RefreshServices){
+.controller('TrackerController', function($state, $scope, trackServices,$ionicPopup, $ionicLoading, trackedServices, trackerServices, RefreshServices){
 
   $scope.showTracker = function(){
     trackerServices.getTracker().success(function(data){
@@ -177,15 +222,37 @@ angular.module('starter.controllers', [])
   };
 
   $scope.deleteTracker = function(tracker){
-    trackerServices.deleteTracker(tracker).success(function(data){
+
+
+                          var confirmPopup = $ionicPopup.confirm({
+                             title: 'Delete Tracking',
+                             template: 'Are you sure you want to remove ' + tracker.name +'?'
+                           });
+
+            confirmPopup.then(function(res) {
+                  if(res) {    trackerServices.deleteTracker(tracker).success(function(data){
+
       $scope.tracks = data;
       console.log("Berjaya delete nama tracker " + tracker.name + " id kite(tracked) " +tracker.trackedId);
     });
                      $ionicPopup.alert({
                       title: 'Successfully delete!',
                       content: 'Username '+ tracker.name+ ' has been removed ' 
+                   
                     })
-        //  $scope.Refresh();
+         $state.go($state.current, {}, {reload: true});
+
+              console.log('You are sure');
+                           } 
+
+                  else {
+             console.log('You are not sure');
+                        }
+         });
+
+
+
+
                      
   };
 
@@ -270,11 +337,19 @@ $scope.showTracker();
                   }
    });
 
-                    
   };
 
     $scope.logoutUser = function(register) {
-              
+
+
+                    var confirmPopup = $ionicPopup.confirm({
+                       title: 'Log Out',
+                       template: 'Are you sure you want to log out?'
+                     });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+
                   //tak keluar sbb refresh cepat sangat tp ok je
                  username =  SessionStorage.getSession("username");
                  $ionicPopup.alert({
@@ -299,13 +374,169 @@ $scope.showTracker();
                     $state.go('main'); 
 
                     //manually refresh
-                    //$ionicHistory.clearCache(); 
+                    $ionicHistory.clearCache(); 
                    // $window.location.reload(true); 
                   console.log("Sepatutnya null - >id " + userId + "name " + username);
+
+
+        console.log('You are sure');
+                     } 
+
+            else {
+       console.log('You are not sure');
+                  }
+   });
 
             } //end logout
 
 })
+
+//Feedback
+//Controller to send feedback
+.controller('FeedbackController', function($scope,feedbackServices) {
+
+
+ $scope.sendFeedback = function(feedback){
+    feedbackServices.sendFeedback(feedback).success(function(data){
+    $ionicLoading.show();
+      $scope.feedbacks = data;
+    $ionicLoading.hide();
+      console.log("feedback"+ data );
+
+                         if (data == 1) {
+
+                    $ionicPopup.alert({
+                      title: 'Successfully send!',
+                      content: 'Thank you for your feedback !' 
+                    })
+                    $state.go('tabsController.settings'); 
+                    } 
+
+                    else {
+
+                    $ionicPopup.alert({
+                      title: 'Opss',
+                      content: 'Error!'  })}
+
+
+
+
+    });
+  };
+
+
+})
+
+//Edit username
+//Controller Edit username
+.controller('EditUsernameController', function($ionicHistory,$state,$scope,registerServices,$ionicLoading,$ionicPopup) {
+ 
+ $scope.showUsername = function(){
+    registerServices.getUserDetail().success(function(data){
+ $ionicLoading.show();
+      $scope.registers = data;
+ $ionicLoading.hide();
+      console.log("Berjaya show username: "+ $scope.registers.name );
+    });
+  };
+
+
+
+  $scope.updateUsername = function(register){
+
+
+ 
+
+    registerServices.updateUsername(register).success(function(data){
+      $ionicLoading.show();
+      $scope.registers = data;
+      $ionicLoading.hide();
+      console.log("Berjaya update. Data : "+ data);
+
+                   if (data == 1) {
+
+                    $ionicPopup.alert({
+                      title: 'Successfully updated!',
+                      content: 'Your new username is '+ register.username+ ' !' 
+                    })
+                    $state.go('tabsController.settings'); 
+                    } 
+
+                    else if (data == 2) {
+
+                    $ionicPopup.alert({
+                      title: 'Opss',
+                      content: 'Wrong password'  })}
+
+
+
+                    else if (data == 0) {
+
+                    $ionicPopup.alert({
+                      title: 'Opss',
+                      content: 'The username '+ register.username+ ' is already taken by others! Please try again.' 
+                    })}
+
+ });
+
+  };
+
+ $scope.showUsername();
+})
+
+//Change password
+//Controller Change password
+.controller('ChangePasswordController', function($state,$scope,registerServices,$ionicLoading,$ionicPopup) {
+
+
+  $scope.updatePassword = function(register){
+    registerServices.updatePassword(register).success(function(data){
+      $ionicLoading.show();
+      $scope.registers = data;
+      $ionicLoading.hide();
+      console.log("Berjaya update. Data : "+data);
+
+                   if (data == 1) {
+
+                    $ionicPopup.alert({
+                      title: 'Successfully updated!',
+                      content: 'Your password is updated!' 
+                    })
+                    $state.go('tabsController.settings'); 
+
+                    } 
+
+                    else if (data == 0) {
+
+                    $ionicPopup.alert({
+                      title: 'Opss',
+                      content: 'Wrong password. The password is not updated!' 
+                    })
+                    $state.go('tabsController.settings'); 
+                  }
+
+                    else {
+
+                    $ionicPopup.alert({
+                      title: 'Opss',
+                      content: 'Error!' 
+                    })}
+
+ });
+
+  };
+
+
+})
+
+
+
+
+
+
+
+
+
 
 //ADD TRACKER
 //To call the functions for trackServices FOR ADD TRACKER
@@ -530,12 +761,15 @@ else  {
 
     $scope.loginUser = function(register){
         registerServices.loginUser(register).success(function(data){
+ $ionicLoading.show();
             $scope.registers = data;
             console.log("Berjaya dapat userId " + $scope.registers.userid );
             console.log("Data " + data );
 
         if (data==0)        
                     {
+                    $ionicLoading.hide();
+                    
                     $ionicPopup.alert({
                       title: 'Error',
                       content: 'Hi '+  register.name+ '! Wrong password. Please try again.'
@@ -545,6 +779,7 @@ else  {
 
          else if(data==1)        
                     {
+                    $ionicLoading.hide();
                     $ionicPopup.alert({
                       title: 'Error',
                       content: 'Hi '+  register.name+ '! Your username is not registered yet'
@@ -552,6 +787,7 @@ else  {
                     }
 
         else if (data!=0)  {
+                    $ionicLoading.hide();
                     SessionStorage.setSession("userId",$scope.registers.userid);
                     SessionStorage.setSession("username",$scope.registers.name);
                     SessionStorage.setSession("userSession",1);
@@ -575,6 +811,7 @@ else  {
        
 else  {
                       
+                    $ionicLoading.hide();
                     $ionicPopup.alert({
                       title: 'Error',
                       content: 'Hi '+  register.name+ '! Please try again. Error'
@@ -605,10 +842,12 @@ else  {
     $scope.addUser = function(register){
 
         registerServices.addUser(register).success(function(data){
+ $ionicLoading.show();
             $scope.registers = data;
             console.log("scope.registers " + $scope.registers);
 
                      if (data==1){
+                    $ionicLoading.hide();
                       $ionicPopup.alert({
                       title: 'Registration success',
                       content: 'Hi '+  register.name+ '. Thank you for your registration. You can sign in now!'
@@ -619,6 +858,7 @@ else  {
                      }
 
                      else if (data==2){
+                    $ionicLoading.hide();
                       $ionicPopup.alert({
                       title: 'Opps!',
                       content: 'Hi '+  register.name+ '. Sorry, the email is already registered :('
@@ -626,6 +866,7 @@ else  {
                     }
 
                      else if (data==3){
+                    $ionicLoading.hide();
                       $ionicPopup.alert({
                       title: 'Opps!',
                       content: 'Hi '+  register.name+ '. Sorry, the username is already taken :('
@@ -633,6 +874,7 @@ else  {
                     }
 
                      else {
+                    $ionicLoading.hide();
                       $ionicPopup.alert({
                       title: 'Error',
                       content: 'Sorry '+  register.name+ '. Error! Please Try Again'
@@ -692,3 +934,70 @@ else  {
     }
   }, 100);
 })
+
+
+
+
+
+//REVERSE GEO
+
+ 
+.controller('getLocationCtrl', function($scope, $state, $cordovaGeolocation, LocalStorage, ReverseGeoCoder) {
+
+  //ng-model in getLocation.html
+  $scope.latitude=0;
+  $scope.longitude=0;
+  $scope.address='';
+  $scope.map='';
+  $scope.description='';
+
+  $cordovaGeolocation
+    .getCurrentPosition({
+      timeout: 20000,
+      maximumAge: 30000,
+      enableHighAccuracy: false,
+
+    }).then(function(results){
+      $scope.latitude=results.coords.latitude;
+      $scope.longitude=results.coords.longitude;
+      ReverseGeoCoder
+        .get(results.coords.latitude, results.coords.longitude)
+        .then(function(results){
+          $scope.address= results.address;
+          $scope.map=results.map;
+        }, function(error){
+          console.log(error)
+        });
+    }, function(error){
+      console.log('error');
+    })
+
+  $scope.saveLocation = function() {
+
+    $scope.checkins.push({
+      id: $scope.checkins.length+1,
+      latitude: $scope.latitude,
+      longitude: $scope.longitude,
+      address: $scope.address,
+      map: $scope.map,
+      description: $scope.description,
+    });
+
+    LocalStorage.set('checkins', $scope.checkins);
+    $state.go('listing');
+  }
+})
+   
+.controller('locationDetailsCtrl', function($scope, $stateParams) {
+
+  $scope.checkin=$scope.checkins.filter(function(checkin){
+    return checkin.id == $stateParams.id;
+  }).pop();
+  
+  console.log($scope.checkin); //display details based on id in console
+  console.log($stateParams); //display id in console
+
+})
+
+
+

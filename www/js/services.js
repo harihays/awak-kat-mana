@@ -275,21 +275,42 @@ angular.module('starter.services', [])
         },
 
         //User login 
-        updateUsername: function (){
+        updateUsername: function (register){
           userId = SessionStorage.getSession("userId");
-          console.log("User Id "+ userId +" untuk showEmail ");
-            return $http.get(baseUrl+'updateUsername.php?userId='+userId);
+          console.log("User Id "+ userId +" untuk updateUsername ");
+            return $http.get(baseUrl+'updateUsername.php?userId='+userId+'&username='+register.username);
         },
 
         //User login 
-        updatePassword: function (){
+        updatePassword: function (register){
           userId = SessionStorage.getSession("userId");
-          console.log("User Id "+ userId +" untuk showEmail ");
-            return $http.get(baseUrl+'updatePassword.php?userId='+userId);
+          console.log("User Id "+ userId +" untuk updatePassword ");
+            return $http.get(baseUrl+'updatePassword.php?userId='+userId+'&passwordOld='+register.passwordOld+'&passwordNew='+register.passwordNew);
         }
 
     };
 })
+
+
+
+//Functions for feedback table
+.factory('feedbackServices', function($http, SessionStorage) {
+    var baseUrl = 'http://fyproject.site88.net/api/';
+    var userId = SessionStorage.getSession("userId");
+    console.log("User Id utk show feedback "+ userId);
+
+    return {
+
+        //Tak guna
+        //To save the user's location for the first time 
+        sendFeedback: function (feedback){
+             return $http.get(baseUrl+'sendFeedback.php?userId='+userId+'&comment='+feedback.comment); 
+           
+        }
+
+    };
+})
+
 
 //To get location of user to put markers
 .factory('Markers', function($http, SessionStorage) {
@@ -357,7 +378,7 @@ angular.module('starter.services', [])
         });
 
         var infoWindow = new google.maps.InfoWindow({
-            content: "Saya kat sini >.< "
+            content: "<center> Saya kat sini >.< <br> IIUM Gombak Selangor Malaysia</center> "
         });
 
         google.maps.event.addListener(here, 'click', function () {
@@ -429,6 +450,67 @@ angular.module('starter.services', [])
     }
   }
 
+})
+
+
+
+
+.factory('ReverseGeoCoder', function($http, $q){
+  return {
+    get: function(latitude, longitude) {
+      var deferred = $q.defer();
+      $http.get('http://www.mapquestapi.com/geocoding/v1/reverse?key=glZYY2d2Nb7H8aGz2ggDsf7DIKXckzbM&location=' + latitude + ',' + longitude)
+      .then(function(response) {
+        
+              var addressObject = response.data.results[0].locations[0];
+              var addressString = 
+                addressObject.street + ', ' +
+                addressObject.adminArea6 + ', ' +
+                addressObject.adminArea5 + ', ' +
+                addressObject.adminArea3 + ', ' +
+                addressObject.postalCode + ', ' +
+                addressObject.adminArea1;
+              var mapString = addressObject.mapUrl;
+
+                deferred.resolve({
+                address: addressString,
+                map: mapString
+              });
+
+              console.log(addressString, mapString);
+              console.log(addressObject);
+              // console.log(response);
+
+      }, function(err) {
+        deferred.reject();
+      });
+      return deferred.promise;
+    }
+  }
+})
+
+
+//LocalStorage.get('key')...
+//
+//LocalStorage.set('key', data)...
+
+.factory('LocalStorage', function(){
+  return {
+
+    get:function(key, defaults) {
+      var data=localStorage.getItem(key);
+
+      if(data) {
+        return JSON.parse(data);//string to object
+      }
+      return defaults; //if null then return defaults
+    },
+
+    set:function(key, data) {
+      localStorage.setItem(key, JSON.stringify(data)); //object to string
+
+    }
+  }
 })
 
 ;

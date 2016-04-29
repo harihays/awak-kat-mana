@@ -2,23 +2,21 @@
     <ion-content padding="true" class="manual-ios-statusbar-padding">
         <h4 id="changepass-heading8" style="color:#179E6D;font-weight:400;text-align:center;">Change Password</h4>
         <div class="spacer" style="width: 300px; height: 0px;"></div>
-        <form class="list">
-            <label class="item item-input" name="username">
-                <input type="text" placeholder="username">
+        <form name="changePass" class="list">
+
+            <label class="item item-input">
+                <input type="password" placeholder="current password" ng-model="register.passwordOld" ng-required="true">
             </label>
             <label class="item item-input">
-                <input type="password" placeholder="current password">
+                <input type="password" placeholder="change password" ng-model="register.passwordNew" ng-required="true">
             </label>
             <label class="item item-input">
-                <input type="password" placeholder="change password">
-            </label>
-            <label class="item item-input">
-                <input type="password" placeholder="confirm password">
+                <input type="password" placeholder="confirm password"  ng-required="true">
             </label>
         </form>
         <div class="button-bar">
-            <button id="changepass-button15" class="button button-assertive  button-block">Cancel</button>
-            <button id="changepass-button16" class="button button-balanced  button-block">Save</button>
+            <button id="changepass-button15" class="button button-assertive  button-block" ui-sref="tabsController.settings">Cancel</button>
+            <button id="changepass-button16" class="button button-balanced  button-block" ng-click="changePass.$valid &&updatePassword(register)">Save</button>
         </div>
     </ion-content>
 </ion-view>

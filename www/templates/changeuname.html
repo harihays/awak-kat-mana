@@ -4,20 +4,21 @@
             <h4 id="changeuname-heading10" style="color:#179E6D;font-weight:400;text-align:center;">Change Username</h4>
             <div class="spacer" style="width: 300px; height: 0px;"></div>
             <h4 id="changeuname-heading9" style="color:#009FE0;font-weight:400;">Username</h4>
-            <h4 id="changeuname-heading13" style="color:#414141;font-weight:400;">syahirahghaz</h4>
+            <h4 id="changeuname-heading13" style="color:#414141;font-weight:400;"> {{ registers.name }}</h4>
         </form>
         <h4 id="changeuname-heading11" style="color:#009FE0;font-weight:400;">New Username</h4>
-        <form class="list">
+        <form name="changeuname" class="list">
             <label class="item item-input" name="newuname">
-                <input type="text" placeholder="new username">
+                <input type="text" placeholder="new username"  ng-model="register.username" ng-required="true">
             </label>
-            <label class="item item-input" name="password">
-                <input type="text" placeholder="password">
-            </label>
-        </form>
-        <div class="button-bar">
-            <button id="changeuname-button18" class="button button-assertive  button-block">Cancel</button>
-            <button id="changeuname-button19" class="button button-balanced  button-block">Save</button>
+     
+
+            <div class="button-bar">
+            <button id="changeuname-button18" class="button button-assertive  button-block" ui-sref="tabsController.settings">Cancel</button>
+            <button id="changeuname-button19" class="button button-balanced  button-block" ng-click="changeuname.$valid &&updateUsername(register)">Save</button>
         </div>
+
+        </form>
+        
     </ion-content>
 </ion-view>
